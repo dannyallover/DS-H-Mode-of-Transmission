@@ -1,0 +1,444 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{ifpdf,newtxtext,newtxmath} 
+\usepackage{array,graphicx,dcolumn,multirow,hevea,abstract,hanging,fancyhdr,float}
+\usepackage[dvipsnames]{xcolor}
+% change next 3 lines each issue
+\topmargin=-.3in \oddsidemargin=.3in \evensidemargin=.3in \textheight=9in \textwidth=6in
+\pagestyle{fancy} 
+\fancyhead[L]{\protect\small \href{\jref}{\jhead}, \jdate}
+\fancyhead[R]{\protect\small Mode of Transmission Diagrams} % replace with running head
+\fancypagestyle{firstpage}{%
+ \lhead{\protect\small \href{\jref}{\jhead}, \jdate}
+ \rhead{}
+}
+\usepackage{caption}
+\usepackage[hyperfootnotes=false,breaklinks=true]{hyperref} % was dvipdfmx
+% \usepackage[hyperfootnotes=false,breaklinks=true,linkbordercolor={1 1 1},citebordercolor={1 1 1}]{hyperref}
+% \usepackage{natbib} % must come afer hyperfootnotes, use 2nd version for bibtex
+% \setlength{\bibsep}{0pt}
+\urlstyle{rm}
+\usepackage[hyphenbreaks]{breakurl}
+
+\newcolumntype{A}{>{\centering}p{3cm}}
+\newcolumntype{B}{>{\centering}p{2cm}}
+% DO NOT USE ADDITIONAL PACKAGES unless you make sure they work with Hevea.
+% You may define new commands, but these may cause other troubles, so try to avoid it.
+
+% FOR BIBTEX USERS (Bibtex is not recommended, but we can use it):
+% \usepackage{natbib} % must come afer hypperref
+% in references: \bibliographystyle{apalike3} \setlength{\bibsep}{0pt} \bibliography{WHATEVER}
+% download http://journal.sjdm.org/apalike3.bst
+\usepackage{booktabs} % \toprule \midrule \bottomrule \cmidrule(lr){a-b}
+% define centered and ragged columns:
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash }p{#1}} % can use m{}
+\newcolumntype{C}[1]{>{\centering\arraybackslash }p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash }p{#1}}
+\newcolumntype{d}[1]{D{.}{.}{#1}} % d{3.2} for 3 places on l, 2 on r
+\newcommand{\mc}{\multicolumn}
+\setlength\tabcolsep{1mm}
+\setlength\columnsep{5mm}
+\setlength\abovecaptionskip{1ex}
+\setlength\belowcaptionskip{.5ex}
+\setlength\belowbottomsep{.3ex}
+\setlength\lightrulewidth{.04em}
+\renewcommand\arraystretch{1.2}
+\renewcommand{\topfraction}{1}
+\renewcommand{\textfraction}{0}
+\renewcommand{\floatpagefraction}{.9}
+% \renewcommand{\baselinestretch}{1.00} \large\normalsize % for fixing spaces
+\widowpenalty=1000
+\clubpenalty=1000
+\setlength{\parskip}{0ex}
+\let\tempone\itemize
+\let\temptwo\enditemize
+\let\tempthree\enumerate
+\let\tempfour\endenumerate
+\renewenvironment{itemize}{\tempone\setlength{\itemsep}{0pt}}{\temptwo}
+\renewenvironment{enumerate}{\tempthree\setlength{\itemsep}{0pt}}{\tempfour}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{width=7.5cm,compat=1.12}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{calc}
+
+\usepackage{colortbl}
+\usepackage{arydshln}
+
+\definecolor{LightYellow}{rgb}{1.0, 1.0, 0.65}
+\definecolor{LightCyan}{rgb}{0.7, 1.0, 1.0}
+\definecolor{LightGreen}{rgb}{0.65, 1.0, 0.65}
+\definecolor{LightPink}{rgb}{0.988235, 0.823529, 0.6}
+
+\usepackage[first=0,last=9]{lcg}
+\newcommand{\ra}{\rand0.\arabic{rand}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{1} % start with first page
+
+\title{Mode of Transmission}
+
+
+\date{} % leave empty
+\begin{document} % goes here
+
+\begin{htmlonly}
+\href{\jref}{\jhead}, \jdate, pp.\
+\end{htmlonly}
+
+\maketitle
+\thispagestyle{firstpage}
+
+
+\newcolumntype{U}{>{\centering\arraybackslash}p{.75cm}}
+\newcolumntype{V}{>{\centering\arraybackslash}p{1.75cm}}
+\newcolumntype{W}{>{\centering\arraybackslash}p{2.3cm}}
+\newcolumntype{E}{>{\centering\arraybackslash}p{1cm}}
+
+\section{Numerical Analysis}
+\begin{table}[ht]
+\centering
+\resizebox{12cm}{!}{%
+\begin{tabular}{p{1cm}|VVVVVV}
+\hline
+mot              & max & median & mean & total & dom. val & dom. year \\
+\hline
+'ela & 26 & 1 & 1 & 321 & 0.212 & -10 \\
+ela & 15 & 1 & 1 & 196 & 0.123 & -10 \\
+'eta & 16 & 1 & 0 & 201 & 0.153 & -10 \\
+\rowcolor{LightYellow}
+ktb & 152 & 6 & 2 & 2045 & 0.842 & -10 \\
+mn & 54 & 2 & 1 & 612 & 0.346 & -10 \\
+rsl & 51 & 2 & 0 & 640 & 0.278 & -10 \\
+\rowcolor{LightYellow}
+sal & 445 & 18 & 2 & 6997 & 2.61 & -10 \\
+\rowcolor{LightYellow}
+shhd & 121 & 3 & 1 & 1133 & 0.607 & -10 \\
+\rowcolor{LightYellow}
+sm'e & 1381 & 88 & 13 & 35134 & 8.733 & -10 \\
+yrd & 38 & 2 & 0 & 437 & 0.298 & -10 \\
+\rowcolor{LightYellow}
+l & 132 & 4 & 1 & 1514 & 0.919 & -9 \\
+\rowcolor{LightYellow}
+raa & 759 & 19 & 1 & 7459 & 3.376 & -5 \\
+\rowcolor{LightYellow}
+dkr & 347 & 12 & 2 & 4720 & 1.812 & -4 \\
+adn & 41 & 2 & 0 & 541 & 0.253 & -2 \\
+\rowcolor{LightGreen}
+qal & 13759 & 428 & 73 & 170962 & 60.283 & -2 \\
+rf'e & 98 & 3 & 0 & 881 & 0.442 & 9 \\
+blgh & 14 & 1 & 1 & 199 & 0.071 & 11 \\
+lqa & 57 & 2 & 1 & 550 & 0.241 & 12 \\
+\rowcolor{LightCyan}
+an & 1175 & 47 & 6 & 18791 & 12.627 & 14 \\
+z'em & 19 & 1 & 1 & 317 & 0.255 & 15 \\
+\rowcolor{LightGreen}
+'en & 8595 & 1402 & 148 & 560533 & 87.803 & 90 \\
+\rowcolor{LightGreen}
+hdth & 6534 & 1447 & 737 & 578518 & 94.002 & 227 \\
+rwa & 19 & 2 & 1 & 619 & 0.39 & 229 \\
+\rowcolor{LightYellow}
+qra & 315 & 11 & 2 & 4152 & 1.517 & 275 \\
+\rowcolor{LightCyan}
+akhbr & 1108 & 216 & 157 & 86313 & 41.051 & 296 \\
+\rowcolor{LightCyan}
+anba & 858 & 126 & 90 & 50113 & 52.265 & 382 \\
+\hdashline
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+\section{MoT Word Proportion Over Time (Tier 1 and Tier 2)}
+\begin{tikzpicture}[scale=.9]
+\begin{axis}[
+    xmin = -11, xmax = 410,
+    ymin = 0, ymax = 1,
+    xtick distance = 50,
+    ytick distance = .2,
+    minor tick num = 1,
+    major grid style = {lightgray},
+    minor grid style = {lightgray!25},
+    width = \textwidth,
+    height = 0.6\textwidth,
+    legend cell align = {left},
+    legend pos = north west,
+    axis lines = left,
+    xlabel={mot year},
+    ylabel={mot ratio}
+]
+\addplot[blue, thick, densely dashed] table [x=year, y=ratio, col sep=comma] {proportions/tear1/a2_qal_proportion_in_each_year.csv};
+
+\addplot[red, thick, densely dotted] table [x=year, y=ratio, col sep=comma] {proportions/tear1/a2_'en_proportion_in_each_year.csv};
+
+\addplot[green, thick, densely dashdotted] table [x=year, y=ratio, col sep=comma] {proportions/tear1/a2_hdth_proportion_in_each_year.csv};
+
+\addplot[magenta, thick, densely dashdotdotted] table [x=year, y=ratio, col sep=comma] {proportions/tear2/a2_akhbr_proportion_in_each_year.csv};
+
+\addplot[yellow, thick, densely dashdotted] table [x=year, y=ratio, col sep=comma] {proportions/tear2/a2_an_proportion_in_each_year.csv};
+
+\addplot[brown, thick, densely dashdotdotted] table [x=year, y=ratio, col sep=comma] {proportions/tear2/a2_anba_proportion_in_each_year.csv};
+
+\begin{scope}
+    \draw[green, thick, densely dashdotted] (305, .95) -- (312, .95) -- (319, .95)     node[right, black]{\small hadth};
+    \draw[red, thick, densely dotted] (305, .9) -- (312, .9) -- (319, .9)
+		node[right, black]{\small 'en};
+	\draw[blue, thick, densely dashed] (305, .85) -- (312, .85) -- (319, .85)
+		node[right, black]{\small qal};
+	\draw[magenta, thick, densely dashdotdotted] (355,.95) -- (362,.95) -- (369,.95)     node[right, black]{\small akhbr};
+    \draw[brown, thick, densely dashdotdotted] (355,.90) -- (362,.90) -- (369,.90)     node[right, black]{\small anba};
+	\draw[yellow, thick, densely dashdotted] (355,.85) -- (362,.85) -- (369,.85)     node[right, black]{\small an};
+\end{scope}
+
+% \legend{
+%     one,
+%     two,
+%     three,
+%     four
+% }
+\end{axis}
+\end{tikzpicture}
+
+\newpage
+
+\section{MoT Word Proportion Over Time (Tier 3)}
+
+\hspace*{-1.5em}\begin{tikzpicture}[scale=.9]
+\begin{axis}[
+    xmin = 0, xmax = 410,
+    ymin = 0, ymax = 0.10,
+    xtick distance = 50,
+    ytick distance = .01,
+    minor tick num = 1,
+    major grid style = {lightgray},
+    minor grid style = {lightgray!25},
+    width = \textwidth,
+    height = 0.6\textwidth,
+    legend cell align = {left},
+    legend pos = north west,
+    axis lines = left,
+    xlabel={mot year},
+    ylabel={mot ratio}
+]
+\addplot[blue, thick, densely dotted] table [x=year, y=ratio, col sep=comma] {proportions/tear3/a2_sal_proportion_in_each_year.csv};
+
+\addplot[red, thick, densely dashed] table [x=year, y=ratio, col sep=comma] {proportions/tear3/a2_sm'e_proportion_in_each_year.csv};
+
+\addplot[green, thick, densely dashdotted] table [x=year, y=ratio, col sep=comma] {proportions/tear3/a2_dkr_proportion_in_each_year.csv};
+
+\addplot[magenta, thick, densely dashdotdotted] table [x=year, y=ratio, col sep=comma] {proportions/tear3/a2_raa_proportion_in_each_year.csv};
+
+\addplot[brown, thick, densely dashdotted] table [x=year, y=ratio, col sep=comma] {proportions/tear3/a2_qra_proportion_in_each_year.csv};
+
+\addplot[yellow, thick, densely dashdotdotted] table [x=year, y=ratio, col sep=comma] {proportions/tear3/a2_ktb_proportion_in_each_year.csv};
+
+\begin{scope}
+    \draw[red, thick, densely dashed] (335, .095) -- (342, .095) -- (349, .095)
+		node[right, black]{\small sm'e};
+	\draw[blue, thick, densely dotted] (335, .090) -- (342, .090) -- (349, .090)
+		node[right, black]{\small sal};
+	\draw[magenta, thick, densely dashdotdotted] (335, .085) -- (342, .085) -- (349, .085)
+		node[right, black]{\small raa};
+	\draw[green, thick, densely dashdotted] (335, .080) -- (342, .080) -- (349, .080)
+		node[right, black]{\small dkr};
+	\draw[brown, thick, densely dashdotted] (335, .075) -- (342, .075) -- (349, .075)
+		node[right, black]{\small qra};
+	\draw[yellow, thick, densely dashdotdotted] (335, .070) -- (342, .070) -- (349, .070)
+		node[right, black]{\small ktb};
+\end{scope}
+
+\end{axis}
+\end{tikzpicture}
+
+\hphantom{a}
+\newpage
+
+
+\section{Number of MoT Words Used by Transmitters}
+\begin{figure}[h]
+\begin{tikzpicture}[scale=.65]
+\begin{axis}[%
+xlabel = \LARGE$\#$ of words,
+ylabel = \LARGE$\#$ of transmitters,
+scale only axis,
+width=8in,
+height=5in,
+nodes near coords,
+nodes near coords style={font=\tiny, rotate=90, anchor=west, text width=.03cm},
+xmin=0, xmax=32,
+ymin=0, ymax=25000,
+axis on top]
+\addplot[
+  ybar,
+  bar width=0.2105in, 
+  bar shift=0in,
+  fill=white,
+  draw=black] 
+  plot coordinates{ 
+  (1,23029) (2,8108) (3,4008) (4,2222) (5,1343) (6,728) (7,405) (8,208) (9,101) (10,81) (11,47) (12,22) (13,19) (14,12) (15,10) (16,10) (17,3) (18,1) (19,3) (20,2) (21,3) (22,2) (23,1) (25,1) (26,2) (31,1)
+  };
+\end{axis}
+\end{tikzpicture}
+\caption*{aaaaaaa}
+\end{figure}
+
+\newpage
+\section{MoT Number and Percentage of Transmitters Used}
+\begin{table}[ht]
+\centering
+\begin{tabular}{p{2cm}|WW}
+\hline
+mot              & num transmitters & per. transmitters \\
+\hline
+hdth & 28594 & 70.826 \\
+'en & 14527 & 35.983 \\
+akhbr & 11796 & 29.218 \\
+anba & 8018 & 19.86 \\
+qal & 6290 & 15.58 \\
+sm'e & 3399 & 8.419 \\
+an & 1875 & 4.644 \\
+qra & 1022 & 2.531 \\
+ktb & 694 & 1.719 \\
+dkr & 677 & 1.677 \\
+rwa & 617 & 1.528 \\
+raa & 416 & 1.03 \\
+sal & 369 & 0.914 \\
+mn & 232 & 0.575 \\
+l & 128 & 0.317 \\
+shhd & 117 & 0.29 \\
+lqa & 115 & 0.285 \\
+z'em & 84 & 0.208 \\
+'ela & 67 & 0.166 \\
+rsl & 66 & 0.163 \\
+ela & 60 & 0.149 \\
+blgh & 45 & 0.111 \\
+adn & 23 & 0.057 \\
+rf'e & 18 & 0.045 \\
+yrd & 16 & 0.04 \\
+'eta & 10 & 0.025 \\
+\hdashline
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+\section{Specific Transmitters that Used Each MoT the Most in a Given Time Bound}
+\begin{table}[ht]
+\centering
+\scalebox{0.8}{
+\begin{tabular}{|U|U|E|E|E|E|E|E|E|E|E|E|E|E|}
+\hline
+\multicolumn{2}{|c|}{year span} & hdth & 'en & qal & akhbr & anba & an & sm'e & sal & raa & dkr & qra & ktb \\
+\hline
+-10 & 0 & 4396 & 4396 & 4396 & 4883 & 4049 & 4883 & 4396 & 4883 & 4049 & 4049 & 4049 & 4883 \\
+\hline
+0 & 10 & 4396 & 4396 & 4396 & 4883 & 4049 & 4967 & 4396 & 4967 & 4967 & 4049 & 4049 & 4883 \\
+\hline
+10 & 20 & 4396 & 4396 & 4396 & 4883 & 4049 & 4967 & 4396 & 4967 & 4967 & 4049 & 4049 & 4883 \\
+\hline
+20 & 30 & 4396 & 4396 & 4396 & 4883 & 4049 & 720 & 4396 & 4967 & 4967 & 4049 & 4049 & 4883 \\
+\hline
+30 & 40 & 4396 & 4396 & 4396 & 4883 & 4049 & 720 & 4396 & 4967 & 4967 & 4049 & 4049 & 4883 \\
+\hline
+40 & 50 & 4396 & 7863 & 4396 & 4883 & 4049 & 720 & 4396 & 4967 & 4967 & 4049 & 4049 & 4883 \\
+\hline
+50 & 60 & 7272 & 7272 & 720 & 7272 & 7272 & 720 & 4967 & 4967 & 4967 & 4967 & 4883 & 4883 \\
+\hline
+60 & 70 & 7272 & 7272 & 720 & 7272 & 7272 & 720 & 4967 & 4967 & 4967 & 4967 & 4883 & 720 \\
+\hline
+70 & 80 & 6811 & 7272 & 720 & 7272 & 7272 & 720 & 720 & 720 & 720 & 720 & 720 & 720 \\
+\hline
+80 & 90 & 6811 & 7272 & 720 & 5223 & 3795 & 720 & 720 & 720 & 720 & 720 & 720 & 720 \\
+\hline
+90 & 100 & 6811 & 7272 & 720 & 5223 & 2492 & 720 & 7270 & 720 & 720 & 720 & 720 & 720 \\
+\hline
+100 & 110 & 6811 & 7272 & 7272 & 5223 & 2492 & 6080 & 7270 & 2531 & 4118 & 6811 & 7607 & 7272 \\
+\hline
+110 & 120 & 3443 & 7272 & 7272 & 5223 & 8488 & 6080 & 7270 & 2531 & 3122 & 6811 & 7607 & 7272 \\
+\hline
+120 & 130 & 6904 & 3795 & 5223 & 5223 & 8488 & 6080 & 7607 & 2531 & 4533 & 7743 & 7607 & 3795 \\
+\hline
+130 & 140 & 3585 & 3795 & 3585 & 5147 & 4533 & 6080 & 7607 & 2531 & 4533 & 7743 & 7607 & 3795 \\
+\hline
+140 & 150 & 3585 & 3795 & 3585 & 5147 & 4533 & 6080 & 7607 & 4457 & 4533 & 7743 & 8350 & 3795 \\
+\hline
+150 & 160 & 5049 & 3795 & 7426 & 5147 & 4533 & 5147 & 7607 & 3795 & 4533 & 7743 & 8350 & 3795 \\
+\hline
+160 & 170 & 488 & 3443 & 5049 & 5147 & 4533 & 5147 & 7607 & 5281 & 4533 & 7743 & 8350 & 5551 \\
+\hline
+170 & 180 & 488 & 3443 & 5049 & 5147 & 4533 & 5147 & 7607 & 5281 & 4533 & 7743 & 8350 & 5551 \\
+\hline
+180 & 190 & 488 & 3443 & 5049 & 5147 & 4533 & 5147 & 7607 & 5281 & 4533 & 7743 & 8350 & 5551 \\
+\hline
+190 & 200 & 488 & 3443 & 5049 & 29199 & 4533 & 5147 & 3443 & 5281 & 4533 & 7743 & 8350 & 6295 \\
+\hline
+200 & 210 & 488 & 4533 & 5049 & 29199 & 4533 & 7117 & 7186 & 488 & 4533 & 7743 & 8350 & 6295 \\
+\hline
+210 & 220 & 488 & 402 & 5049 & 9880 & 9880 & 7117 & 7186 & 488 & 4533 & 23092 & 8350 & 6295 \\
+\hline
+220 & 230 & 488 & 402 & 5049 & 9880 & 9880 & 7117 & 7186 & 488 & 3711 & 23092 & 8350 & 6295 \\
+\hline
+230 & 240 & 488 & 402 & 10025 & 9880 & 9880 & 7117 & 7186 & 488 & 3711 & 28227 & 488 & 6295 \\
+\hline
+240 & 250 & 10025 & 918 & 10025 & 9880 & 9880 & 10306 & 7186 & 20916 & 6823 & 10306 & 12613 & 6295 \\
+\hline
+250 & 260 & 10025 & 918 & 10025 & 9880 & 9880 & 10306 & 3567 & 20916 & 6823 & 10306 & 9866 & 6295 \\
+\hline
+260 & 270 & 10025 & 918 & 10025 & 9880 & 9880 & 10306 & 3567 & 20916 & 6823 & 10306 & 9866 & 4657 \\
+\hline
+270 & 280 & 10025 & 918 & 10025 & 9880 & 9880 & 10306 & 1540 & 20916 & 6823 & 10306 & 9866 & 4657 \\
+\hline
+280 & 290 & 18570 & 918 & 10025 & 9880 & 9880 & 10306 & 1540 & 20916 & 10437 & 10306 & 9866 & 4657 \\
+\hline
+290 & 300 & 18570 & 9880 & 10025 & 9880 & 9880 & 10306 & 1540 & 20916 & 10437 & 10306 & 9866 & 28842 \\
+\hdashline
+\hline
+\end{tabular}
+}
+\end{table}
+
+\end{document}
+
+
+
+
+
+% %Table 1
+% \begin{table}[h]\centering
+% \caption{Experiment 3: Mean (SD) willingness to contribute to identified
+% and unidentified victims, for self and for the average student.}
+% \begin{tabular}{L{.7in}C{.7in}C{.7in}C{.7in}}\toprule
+%  & Self & Average student & Total\\\midrule
+% Identified victim & 68.28 (55.77) & 45.30 (66.17) & 56.79 (61.89)\\
+% Unidentified victim & 54.06 (61.89) & 38.63 (67.20) & 46.35 (60.63)\\\midrule
+% Total & 61.17 (58.81) & 41.97 (66.51) & \\\bottomrule
+% \mc{4}{p{2.8in}}{Here is a meaningless note about this table.}\\
+% \end{tabular}
+% \end{table}
+
+
+% %Table 2
+% \begin{table}[h]\centering
+% \caption{This table is a very fancy table with a lot of small
+%   corrections in it, like the tildes in brackets. You don't need to do
+% this sort of stuff with your own tables. But it may be useful to look
+% at how notes are done, and how extra space is inserted between columns.}
+% \begin{tabular}{llrc@{\quad}rc@{\quad}rc@{\quad}rc}\toprule
+%  &  & \mc{2}{C{1in}}{Accuracy of first response (\%) {\ }} &
+% \mc{2}{C{1in}}{Accuracy of final response (\%) {\ }} &
+% \mc{2}{C{1in}}{Change of mind (\%) {\ }} & \mc{2}{C{1in}}{Response time (ms) {\ }}\\
+% \cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+%  &  & { ~ } \itshape M & \itshape SD & { ~ }  \itshape M & \itshape SD & { ~ }  \itshape M &
+% \itshape SD & { ~ ~ }  \itshape M {\ } & \itshape SD\\\midrule
+% Experiment 1 & Congruent & 73 & 44 & 85 & 36 & 20 & 40 & 1479 & 495\\
+%  & Incongruent & 45 & 50 & 84 & 37 & 45 & 50 & 1625 & 498\\
+% Experiment 2 & Congruent & 69 & 46 & 85 & 36 & 26 & 44 & 1567 & 477\\
+%  & Incongruent & 43 & 50 & 85 & 35 & 49 & 50 & 1695 & 469\\\bottomrule
+% \mc{10}{p{6in}}{Note. Means and standard deviations are calculated based on the
+% trial level values (ignoring participants).}
+% \end{tabular}
+% \end{table}
