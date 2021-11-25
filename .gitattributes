@@ -1,0 +1,4 @@
+m4_edge_id_position_sliced-isnad_possible_mots_selected_mot_and_selected_mot_root_word.csv filter=lfs diff=lfs merge=lfs -text
+xxx_all_gk_hadiths.tsv filter=lfs diff=lfs merge=lfs -text
+xxx_book-number-hadith-number_edges.csv filter=lfs diff=lfs merge=lfs -text
+m3_edge_id_sliced-isnad_and_position.csv filter=lfs diff=lfs merge=lfs -text
