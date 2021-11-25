@@ -1,3 +1,3 @@
 # DS-H-Mode-of-Transmission
 
-See [paper](paper.pdf).
+See [figures](figures.pdf) and [appendix](appendix.pdf).
