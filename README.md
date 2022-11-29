@@ -1,3 +1,3 @@
-# [Data Science] Hadith Mode of Transmission
+# Computational Hadith: Computational Hadith: Early Islamic Narratives Transmission
 
-See [figures](figures.pdf) and [appendix](appendix.pdf).
+Codebase for Computational Hadith: Early Islamic Narratives Transmission paper.
